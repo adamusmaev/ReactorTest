@@ -19,13 +19,7 @@ public class MainController {
     }
 
     @GetMapping
-    public Flux<Message> list(@RequestParam ServerRequest request) {
-        Long start = request.queryParam("start").
-                map(Long::new).
-                orElse(0L);
-        Long count = request.queryParam("count").
-                map(Long::new)
-                .orElse(2L);
+    public Flux<Message> list(@RequestParam(defaultValue = "2") Long start, @RequestParam(defaultValue = "3") Long count) {
         return messageService.list();
     }
 
